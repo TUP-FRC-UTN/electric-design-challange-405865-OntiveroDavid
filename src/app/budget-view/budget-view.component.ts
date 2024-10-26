@@ -1,12 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { BudgetService } from '../services/budget.service';
 
 @Component({
   selector: 'app-budget-view',
   standalone: true,
-  imports: [],
   templateUrl: './budget-view.component.html',
-  styleUrl: './budget-view.component.css',
+  styleUrls: ['./budget-view.component.css']
 })
-export class BudgetViewComponent {
-  // ADDITIONAL DOCS: same as BudgetListComponent
+export class BudgetViewComponent implements OnInit {
+  budget: any;
+
+  constructor(
+    private route: ActivatedRoute,
+    private budgetService: BudgetService
+  ) {}
+
+  ngOnInit(): void {
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.budgetService.getBudgetById(id).subscribe(data => (this.budget = data));
+    } else {
+      console.error('El ID es nulo. No se puede obtener el presupuesto.');
+    }
+  }
 }

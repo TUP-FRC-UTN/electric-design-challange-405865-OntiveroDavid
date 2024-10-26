@@ -1,4 +1,27 @@
-<!-- BUILT IT FROM:
-https://getbootstrap.com/docs/5.3/forms/form-control/#example
-https://getbootstrap.com/docs/5.3/forms/select/#default
-https://getbootstrap.com/docs/5.3/forms/select/#default -->
+<form [formGroup]="budgetForm" (ngSubmit)="submitForm()">
+    <div>
+        <label>Fecha de Cotización</label>
+        <input formControlName="date" type="date" />
+    </div>
+    <div>
+        <label>Cliente</label>
+        <input formControlName="client" type="text" />
+    </div>
+
+    <div formArrayName="modules">
+      <div *ngFor="let module of modules.controls; let i = index" [formGroupName]="i">
+        <label>Tipo de Módulo</label>
+        <select formControlName="moduleType">
+          <option *ngFor="let type of moduleTypes" [value]="type.id">{{ type.name }}</option>
+        </select>
+        <label>Precio</label>
+        <input formControlName="price" type="text" disabled />
+        <label>Slots</label>
+        <input formControlName="slots" type="text" disabled />
+        <label>Ambiente</label>
+        <input formControlName="environment" type="text" />
+    </div>
+    </div>
+    <button type="button" (click)="addModule()">Agregar Módulo</button>
+    <button type="submit">Guardar Cotización</button>
+</form>

@@ -1,1 +1,18 @@
-<!-- BUILD IT FROM HERE https://getbootstrap.com/docs/5.3/content/tables/#striped-rows -->
+<table class="table table-striped">
+    <thead>
+        <tr>
+        <th>ID</th>
+        <th>Fecha</th>
+        <th>Cliente</th>
+        <th>Ver</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let budget of budgets">
+        <td>{{ budget.id }}</td>
+        <td>{{ budget.date }}</td>
+        <td>{{ budget.client }}</td>
+        <td><button (click)="viewBudget(budget.id)">Ver</button></td>
+        </tr>
+    </tbody>
+</table>
