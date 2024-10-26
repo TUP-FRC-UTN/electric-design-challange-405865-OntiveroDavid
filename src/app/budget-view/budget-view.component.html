@@ -1,1 +1,10 @@
-<!-- BUILD IT FROM HERE https://getbootstrap.com/docs/5.3/components/card/#sizing -->
+<div class="card">
+    <div class="card-header">Presupuesto de {{ budget.client }}</div>
+    <div class="card-body">
+        <p>Fecha: {{ budget.date }}</p>
+        <p>Total: {{ budget.total }}</p>
+    <div *ngFor="let module of budget.modules">
+        <p>{{ module.name }} - {{ module.price }} - Slots: {{ module.slots }}</p>
+    </div>
+    </div>
+</div>

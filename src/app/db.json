@@ -1,0 +1,11 @@
+{
+    "module-types": [
+        { "id": 1, "name": "Interruptor", "price": 100, "slots": 1 },
+        { "id": 2, "name": "Toma corriente", "price": 150, "slots": 1 },
+        { "id": 3, "name": "USB", "price": 200, "slots": 2 }
+    ],
+    "budgets": [
+        { "id": 1, "name": "Budget 1", "amount": 1000 },
+        { "id": 2, "name": "Budget 2", "amount": 2000 }
+    ]
+}

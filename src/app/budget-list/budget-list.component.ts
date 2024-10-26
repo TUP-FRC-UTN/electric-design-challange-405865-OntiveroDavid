@@ -1,20 +1,35 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { BudgetService } from '../services/budget.service';
+import { Budget } from '../models/budget';
 
 @Component({
   selector: 'app-budget-list',
   standalone: true,
-  imports: [],
   templateUrl: './budget-list.component.html',
-  styleUrl: './budget-list.component.css',
+  styleUrls: ['./budget-list.component.css']
 })
-export class BudgetListComponent {
-  /* ADDITIONAL DOCS:
-    - https://angular.dev/guide/components/lifecycle#
-    - https://angular.dev/guide/http/making-requests#http-observables
-    - https://angular.dev/guide/http/setup#providing-httpclient-through-dependency-injection
-    - https://angular.dev/guide/http/making-requests#setting-request-headers
-    - https://angular.dev/guide/http/making-requests#handling-request-failure
-    - https://angular.dev/guide/http/making-requests#best-practices (async pipe)
-    - https://angular.dev/guide/testing/components-scenarios#example-17 (async pipe)
-  */
+export class BudgetListComponent implements OnInit {
+  budgets: Budget[] = [];
+
+  constructor(private budgetService: BudgetService) {}
+
+  ngOnInit(): void {
+    this.budgetService.getBudgets().subscribe(
+      (data: Budget[]) => {
+        console.log('Datos de presupuestos:', data);
+        this.budgets = data;
+      },
+      error => {
+        console.error('Error al recuperar presupuestos:', error);
+      }
+    );
+  }
+
+  viewBudget(id: number | undefined) {
+    if (id === undefined) {
+      console.warn('El ID del presupuesto no está definido');
+      return;
+    }
+    console.log('Ver presupuesto con ID:', id);
+  }
 }
